@@ -43,3 +43,11 @@ QR nelle impostazioni, stessa rete Wi-Fi, PC e Jarvis accesi. Su HTTP usa la det
 I sorgenti completi sono anche in Jarvis-sorgenti.zip: estraili prima dello sviluppo. Node.js, npm, Windows x64: `npm ci`, `npm run build:siwc`, `npm run build:visual`, `node tools/build-desktop.cjs`. Destinazione `%LOCALAPPDATA%\JarvisBeta\App`; variabile `JARVIS_BUILD_DEST` per una cartella diversa. Runtime/modelli vocali sono separati, negli asset della release. Alcune prove richiedono runtime installato o account collegato.
 
 Licenze dipendenze: [THIRD_PARTY.md](THIRD_PARTY.md), `licenses/`, `vendor/siwc/LICENSE`. Il codice originale è pubblicato per backup e sviluppo personale, senza concedere qui una licenza aggiuntiva. Le dipendenze mantengono le proprie licenze.
+
+## Beta 0.9: progetti e immagini
+
+«A che punto è Simio?» legge documenti attuali con data e fonte. Le attività richieste sono salvate in JARVIS-ATTIVITA.json nella cartella del progetto; copiando quella cartella si trasferiscono anche le attività. Un riepilogo non è una verifica del funzionamento del codice.
+
+«Cerca una foto della Torre Eiffel» mostra immagini Wikimedia con attribuzione. «Genera un paesaggio futuristico» usa SD-Turbo locale: primo utilizzo scarica circa 5 GB e richiede spazio aggiuntivo per installare il runtime privato. Nessuna nuova API a pagamento. Modello a 512×512, risultati e tempi dipendono da prompt e hardware; non offre la qualità di ChatGPT Images. Una prova su GTX 1050 Ti ha impiegato 19,4 secondi. Runtime e modello immagini sono in %LOCALAPPDATA%/JarvisBeta/images, separati dalla voce, scaricabili automaticamente anche sugli altri PC. Non vengono sincronizzati con GitHub né copiati automaticamente su USB.
+
+Le immagini compaiono con scansione luminosa e cornice olografica; «togli immagine», Escape o × le nasconde. Animazioni ridotte quando richiesto dal sistema.
