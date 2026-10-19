@@ -1,0 +1,66 @@
+name: Build macOS preview
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - Jarvis-sorgenti-mac-preview.zip
+      - .github/workflows/build-macos.yml
+permissions:
+  contents: write
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            arch: arm64
+          - os: macos-15-intel
+            arch: x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Extract source
+        run: ditto -x -k Jarvis-sorgenti-mac-preview.zip mac-source
+      - name: Install build dependencies
+        working-directory: mac-source/Jarvis-Beta
+        run: npm ci
+      - name: Build client and scene
+        working-directory: mac-source/Jarvis-Beta
+        run: |
+          npm run build:siwc
+          npm run build:visual
+      - name: Smoke test on macOS
+        working-directory: mac-source/Jarvis-Beta
+        run: npx electron tools/mac-smoke.cjs
+      - name: Build native package
+        working-directory: mac-source/Jarvis-Beta
+        run: node tools/build-macos.cjs
+      - name: Prepare reports
+        run: |
+          mkdir -p dist
+          cp mac-source/Jarvis-Beta/mac-release/${{ matrix.arch }}/Jarvis-macOS-${{ matrix.arch }}.zip dist/
+          cp mac-source/Jarvis-Beta/mac-release/${{ matrix.arch }}/build-report.json dist/Mac-build-${{ matrix.arch }}.json
+          cp mac-source/Jarvis-Beta/mac-smoke-report.json dist/Mac-smoke-${{ matrix.arch }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macOS-${{ matrix.arch }}
+          path: dist/*
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: mac-artifacts
+          merge-multiple: true
+      - name: Publish experimental Mac release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view v0.11.0-mac-preview.1 >/dev/null 2>&1 || gh release create v0.11.0-mac-preview.1 --prerelease --title "Jarvis macOS — anteprima 0.11" --notes-file MACOS.md
+          gh release upload v0.11.0-mac-preview.1 mac-artifacts/* --clobber
