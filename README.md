@@ -6,6 +6,8 @@
 
 [Scarica Jarvis](https://github.com/tommowx/jarvis/releases/latest) · [Novità](https://github.com/tommowx/jarvis/releases) · [Roadmap e macOS](ROADMAP.md)
 
+[![Compilazione macOS](https://github.com/tommowx/jarvis/actions/workflows/build-macos.yml/badge.svg)](https://github.com/tommowx/jarvis/actions/workflows/build-macos.yml)
+
 ## Novità della beta 0.10
 
 | Funzione | Stato |
@@ -15,7 +17,8 @@
 | Memoria interna e importazioni locali | Testati persistenza, deduplicazione e fonti |
 | Mappa animata a colori | Fonti reali e collegamenti espliciti, fino a 6.000 note visibili |
 | Auto-modifiche | Richiedono sorgenti e dipendenze di sviluppo sul PC |
-| macOS / Linux | In roadmap, nessun installer disponibile |
+| macOS | [Anteprima sperimentale Intel e Apple Silicon](MACOS.md); limiti e permessi descritti nella guida |
+| Linux | In roadmap |
 
 ![Vista immagini con cornice olografica](Jarvis-immagini.png)
 
