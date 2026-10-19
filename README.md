@@ -1,3 +1,37 @@
+![Jarvis](Jarvis-banner.svg)
+
+![Versione](https://img.shields.io/github/v/release/tommowx/jarvis?color=51b8c9&style=flat-square) ![Windows](https://img.shields.io/badge/Windows-10%20%2F%2011-26394c?style=flat-square) ![Stato](https://img.shields.io/badge/Stato-beta-e2b879?style=flat-square)
+
+**Un nucleo animato, una conversazione continua, una memoria consultabile.**
+
+[Scarica Jarvis](https://github.com/tommowx/jarvis/releases/latest) · [Novità](https://github.com/tommowx/jarvis/releases) · [Roadmap e macOS](ROADMAP.md)
+
+## Novità della beta 0.10
+
+| Funzione | Stato |
+|---|---|
+| ChatGPT con account collegato | Verificato sul PC di sviluppo |
+| Claude API, OpenAI API, Ollama, API compatibili | Adattatori verificati con fixture; servono modello/accesso dell’utente |
+| Memoria interna e importazioni locali | Testati persistenza, deduplicazione e fonti |
+| Mappa animata a colori | Fonti reali e collegamenti espliciti, fino a 6.000 note visibili |
+| Auto-modifiche | Richiedono sorgenti e dipendenze di sviluppo sul PC |
+| macOS / Linux | In roadmap, nessun installer disponibile |
+
+![Vista immagini con cornice olografica](Jarvis-immagini.png)
+
+![Mappa memoria · dimostrazione con dati di prova](Jarvis-memoria.png)
+
+*La schermata della mappa usa dati dimostrativi, senza conversazioni personali.*
+
+![Prima configurazione](Jarvis-onboarding.png)
+
+### Collegamenti e riservatezza
+Il modello scelto riceve la domanda e la memoria pertinente autorizzata. Le chiavi API sono cifrate tramite Windows e non esportate. Le API possono essere a pagamento; nessuna nuova API viene attivata senza configurazione. Ollama richiede un modello installato sul PC. Una chiave non consente di importare automaticamente le vecchie conversazioni del relativo account.
+
+All’avvio e alla riapertura Jarvis controlla memoria locale e aggiornamenti software. Le cartelle importate vengono ricontrollate anche mentre Jarvis è acceso; sono supportati Markdown, testo, conversazioni JSON/JSONL Codex e Claude riconoscibili. Sono esclusi credenziali, contenuti interni e file non supportati; il risultato mostra conteggi e limiti. USB e archivio interno vengono cercati insieme. «Mostra mappa memoria» apre la mappa a colori. L’archivio interno è in %APPDATA%/Jarvis Beta/memory-library; esportalo con «Esporta memoria» per trasferirlo.
+
+---
+
 # Jarvis per Windows
 
 Assistente con nucleo 3D animato, voce italiana/inglese, conversazione continua, memoria personale e strumenti Windows. Beta: le azioni dipendono dai permessi di Windows e dai controlli accessibili delle app.
