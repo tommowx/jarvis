@@ -102,3 +102,6 @@ Licenze dipendenze: [THIRD_PARTY.md](THIRD_PARTY.md), `licenses/`, `vendor/siwc/
 «Cerca una foto della Torre Eiffel» mostra immagini Wikimedia con attribuzione. «Genera un paesaggio futuristico» usa SD-Turbo locale: primo utilizzo scarica circa 5 GB e richiede spazio aggiuntivo per installare il runtime privato. Nessuna nuova API a pagamento. Modello a 512×512, risultati e tempi dipendono da prompt e hardware; non offre la qualità di ChatGPT Images. Una prova su GTX 1050 Ti ha impiegato 19,4 secondi. Runtime e modello immagini sono in %LOCALAPPDATA%/JarvisBeta/images, separati dalla voce, scaricabili automaticamente anche sugli altri PC. Non vengono sincronizzati con GitHub né copiati automaticamente su USB.
 
 Le immagini compaiono con scansione luminosa e cornice olografica; «togli immagine», Escape o × le nasconde. Animazioni ridotte quando richiesto dal sistema.
+
+### Componenti riutilizzati
+Gli aggiornamenti portano soltanto i componenti cambiati. Le nuove installazioni usano install.json firmato: voce e documenti invariati possono arrivare da una release precedente dello stesso repository, verificati con SHA-256. Non vengono ricaricati 2 GB a ogni modifica del programma. update.json rimane compatibile con gli aggiornatori esistenti.

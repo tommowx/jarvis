@@ -1,4 +1,4 @@
-﻿param([switch]$NoLaunch,[switch]$NoShortcut)
+param([switch]$NoLaunch,[switch]$NoShortcut)
 $ErrorActionPreference='Stop'
 [Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12
 $repo='https://github.com/tommowx/jarvis/releases'
@@ -7,17 +7,23 @@ New-Item -ItemType Directory -Path $jarvisRoot -Force|Out-Null
 $stage=Join-Path $jarvisRoot ('install-'+[guid]::NewGuid().ToString('N'));New-Item -ItemType Directory -Path $stage|Out-Null
 try{
  Write-Host 'Scarico Jarvis e i componenti vocali. Il primo download richiede circa 2 GB.'
- $envelope=Invoke-RestMethod -Uri ($repo+'/latest/download/update.json')
+ $legacyManifest=$false
+ try{$envelope=Invoke-RestMethod -Uri ($repo+'/latest/download/install.json')}catch{if([int]$_.Exception.Response.StatusCode -ne 404){throw};$legacyManifest=$true;$envelope=Invoke-RestMethod -Uri ($repo+'/latest/download/update.json')}
  $bytes=[Convert]::FromBase64String($envelope.payload);$signature=[Convert]::FromBase64String($envelope.signature)
  $rsa=New-Object Security.Cryptography.RSACryptoServiceProvider
  $rsa.FromXmlString('<RSAKeyValue><Modulus>p7ZQ0o2QMcfuHLYJPQjFDruuiBlcAFuiOSKqATa60NIaw+mXxQngAWM3ghle9hQxdFlskOTEn1qnkW/Qd+XIcDtSYrVpaZL4vMcdspOe5q6207y+tUhOQ+PSSkTJCV5mELgTn6ZCSY9rGEfkncEyDaELPiqtzv4XYdFsHWZv2+x9G++CPU0lrvGcj7yxCFLALtWBUcOFaGTpwi1gKfufqMNOPGCjpGMx/PMj7vXRyVbn9Srkl9GzchokH7d+XQ90ImXLUynWu4IiTQPHLOYTbAqCnMfD9RDoD7Y8MukJBUYzcazQET2GtZd5KjiPAxWpYogK1FTEFnYhv1lNc9sTEzT/Hj2v0NrCR5XzByFHokQG0beFCf7pbbL0Za3XjmXC2KopTR4r9T21YV9ApSvXwI5Hk5KBt6fdFj3tKe2o8I0sgg9aaHKbznpIzXVtMLO7VPalu2ZDBFAoCSh/BB2yVZLXts86wiKQyB8/Tg+29G0QK3iR1Dn46ojjm5HKcG+7</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>')
  if(!$rsa.VerifyData($bytes,'SHA256',$signature)){throw 'Firma del manifest non valida.'}
  $manifest=[Text.Encoding]::UTF8.GetString($bytes)|ConvertFrom-Json
- if($manifest.version -notmatch '^\d+\.\d+\.\d+$'){throw 'Versione non valida.'}
+ if($manifest.version -notmatch '^\d+\.\d+\.\d+$' -or (!$legacyManifest -and $manifest.schema -ne 2) -or @($manifest.assets).Count -ne 3 -or @($manifest.assets.id|Select-Object -Unique).Count -ne 3){throw 'Versione o componenti non validi.'}
  Add-Type -AssemblyName System.IO.Compression.FileSystem
  foreach($asset in $manifest.assets){
   if($asset.id -notin @('app','voice','documents') -or $asset.name -notmatch '^Jarvis-[A-Za-z0-9.-]+\.zip$' -or $asset.sha256 -notmatch '^[a-f0-9]{64}$' -or $asset.bytes -lt 1 -or $asset.bytes -gt 2147483647){throw 'Pacchetto non valido.'}
-  if($asset.url -ne ($repo+'/download/v'+$manifest.version+'/'+$asset.name)){throw 'Origine download non autorizzata.'}
+  $expectedNames=@{app='Jarvis-programma.zip';voice='Jarvis-voce-offline.zip';documents='Jarvis-documenti.zip'}
+  if($asset.name -ne $expectedNames[$asset.id]){throw 'Nome componente non valido.'}
+  if($asset.id -eq 'app' -or $legacyManifest){if($asset.url -ne ($repo+'/download/v'+$manifest.version+'/'+$asset.name)){throw 'Origine programma non autorizzata.'}}
+  else{if($asset.url -notmatch ('^'+[regex]::Escape($repo)+'/download/v\d+\.\d+\.\d+/'+[regex]::Escape($asset.name)+'$')){throw 'Origine componente non autorizzata.'}}
+ }
+ foreach($asset in $manifest.assets){
   $zip=Join-Path $stage $asset.name
   Write-Host ('Scarico '+$asset.name)
   (New-Object Net.WebClient).DownloadFile($asset.url,$zip)
