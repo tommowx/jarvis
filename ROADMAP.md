@@ -1,17 +1,19 @@
 # Roadmap Jarvis
 
-## Ora · beta 0.10
-- Collegamento ChatGPT, adattatori API Claude/OpenAI, Ollama e servizi compatibili.
-- Memoria interna condivisa, importatori di testo/conversazioni locali, mappa delle fonti.
-- Immagini ricercate o generate localmente, animazioni per lavori e risposte.
-- Auto-modifiche su PC con sorgenti e dipendenze, backup e verifica del candidato.
+## Beta 0.12
+[Le 15 funzioni: implementazione, prove e limiti](FUNZIONI-0.12.md).
+Windows e Mac condividono la base; le capacità di sistema restano diverse. Anteprima Mac con prova native e updater firmato dedicato; Linux successivo.
 
-## Da fare
-- [ ] macOS: separare controllo finestre/audio/tastiera da PowerShell, archivi Keychain, permessi Accessibilità e microfono, installer firmato e aggiornamenti dedicati; prove su Mac reale.
-- [ ] Linux: backend desktop e audio specifici, pacchetti e prove sulle distribuzioni supportate.
-- [ ] Preparazione automatica dell’ambiente di sviluppo per auto-modifiche su nuove installazioni senza sorgenti/dipendenze.
-- [ ] Importatori aggiuntivi per esportazioni di altre AI; accessi cloud solo tramite funzioni ufficialmente disponibili.
-- [ ] Prove reali Claude/OpenAI/Ollama con credenziali o modelli forniti dall’utente. Attualmente verificati con fixture di protocollo, non account reali.
-- [ ] Grafo oltre 6.000 fonti con livelli di dettaglio e ricerca globale.
+## Verifiche ancora necessarie
+- Microfono reale, rumore, eco e interruzioni durante una conversazione personale.
+- Telefono reale: disponibilità della registrazione nel browser. Conversazione continua mobile richiede una superficie sicura/supportata.
+- Modifiche AI con account collegato valido; connessioni Claude/OpenAI/Ollama reali solo con accessi/modelli dell’utente.
+- Mac fisico: Microfono, Speech, Automazione, Accessibilità, diverse installazioni e autorizzazioni.
 
-Il software non aggira permessi, accessi o protezioni del sistema. Nessuna promessa di compatibilità universale con tutti i servizi AI o importazione nativa di tutte le chat cloud.
+## Sviluppi successivi
+- Notarizzazione Apple e firma commerciale Windows, se disponibili account/certificati.
+- Preparazione automatica dell’ambiente per auto-modifiche su PC nuovi.
+- App mobile/cloud indipendente, con PC spento soltanto per funzioni ospitate da un servizio acceso.
+- Linux e altri importatori ufficiali; grafo oltre 6.000 fonti.
+
+Nessuna promessa di controllo universale, servizi gratuiti illimitati o memoria cloud automaticamente accessibile.

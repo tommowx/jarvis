@@ -6,9 +6,23 @@
 
 [Scarica Jarvis](https://github.com/tommowx/jarvis/releases/latest) · [Novità](https://github.com/tommowx/jarvis/releases) · [Roadmap e macOS](ROADMAP.md)
 
-[![Compilazione macOS](https://github.com/tommowx/jarvis/actions/workflows/build-macos.yml/badge.svg)](https://github.com/tommowx/jarvis/actions/workflows/build-macos.yml)
+## Novità della beta 0.12
 
-## Novità della beta 0.10
+**La postazione compare solo quando serve:** di’ «Mostra cruscotto» per progetti, lavori, ricordi e promemoria. Il nucleo rimane l’interfaccia principale.
+
+- Modifiche ai progetti con patch limitate, controlli disponibili e backup; annullamento protetto dalle modifiche successive.
+- Ricordi confermati correggibili, dizionario personale della voce, interruzione della risposta in conversazione.
+- Backup verificati e ripristino in cartella nuova, con importazione della memoria e preferenze portabili; segreti e dipendenze esclusi.
+- Ricerca nei documenti con fonte apribile, promemoria all’uso dei progetti, notifiche solo sui cambiamenti.
+- Modelli per compito e limite giornaliero di chiamate API per l’instradamento; zero chiamate a pagamento autorizzate per default.
+- Telefono associato: invio registrazione e trascrizione sul PC Windows; non equivale a una telefonata continua su HTTP.
+- macOS: aggiornamento firmato dedicato, conservazione del programma precedente e conferma di avvio. Prove native nei report della release Mac.
+
+[Stato dettagliato delle 15 funzioni e limiti](FUNZIONI-0.12.md)
+
+![Postazione · dati dimostrativi](Jarvis-postazione.png)
+
+## Collegamenti già presenti
 
 | Funzione | Stato |
 |---|---|
@@ -17,7 +31,7 @@
 | Memoria interna e importazioni locali | Testati persistenza, deduplicazione e fonti |
 | Mappa animata a colori | Fonti reali e collegamenti espliciti, fino a 6.000 note visibili |
 | Auto-modifiche | Richiedono sorgenti e dipendenze di sviluppo sul PC |
-| macOS | [Anteprima sperimentale Intel e Apple Silicon](MACOS.md); limiti e permessi descritti nella guida |
+| macOS | [Anteprima Intel e Apple Silicon](MACOS.md); prove e limiti nella guida |
 | Linux | In roadmap |
 
 ![Vista immagini con cornice olografica](Jarvis-immagini.png)
@@ -29,7 +43,7 @@
 ![Prima configurazione](Jarvis-onboarding.png)
 
 ### Collegamenti e riservatezza
-Il modello scelto riceve la domanda e la memoria pertinente autorizzata. Le chiavi API sono cifrate tramite Windows e non esportate. Le API possono essere a pagamento; nessuna nuova API viene attivata senza configurazione. Ollama richiede un modello installato sul PC. Una chiave non consente di importare automaticamente le vecchie conversazioni del relativo account.
+Il modello scelto riceve la domanda e la memoria pertinente autorizzata. Le chiavi API sono cifrate tramite la protezione del sistema e non esportate. Le API possono essere a pagamento; nessuna nuova API viene attivata senza configurazione. Ollama richiede un modello installato sul PC. Una chiave non consente di importare automaticamente le vecchie conversazioni del relativo account.
 
 All’avvio e alla riapertura Jarvis controlla memoria locale e aggiornamenti software. Le cartelle importate vengono ricontrollate anche mentre Jarvis è acceso; sono supportati Markdown, testo, conversazioni JSON/JSONL Codex e Claude riconoscibili. Sono esclusi credenziali, contenuti interni e file non supportati; il risultato mostra conteggi e limiti. USB e archivio interno vengono cercati insieme. «Mostra mappa memoria» apre la mappa a colori. L’archivio interno è in %APPDATA%/Jarvis Beta/memory-library; esportalo con «Esporta memoria» per trasferirlo.
 

@@ -12,9 +12,12 @@ Consenti Microfono e Riconoscimento vocale. Per app e finestre servono i permess
 
 ## Limiti espliciti
 - Microfono, permessi e automazione su un Mac fisico non ancora verificati.
-- Niente generatore locale SD-Turbo, lettore PDF/DOCX/XLSX Python o aggiornamento automatico macOS in questa anteprima.
+- Niente generatore locale SD-Turbo, lettore PDF/DOCX/XLSX Python o funzioni avanzate del desktop non elencate in questa anteprima.
 - Disposizione finestre su monitor, scorciatoie e albero completo dei controlli non ancora portati.
 - Auto-modifica richiede sorgenti e dipendenze di sviluppo sul Mac; non è pronta su un’installazione pulita senza questi componenti.
 - La chiavetta viene cercata nei volumi montati con cartella Obsidian; la selezione tramite seriale Windows non si applica.
 
 I report di compilazione distinguono compilazione, avvio e prove fisiche non eseguite. Non dichiarare questa anteprima equivalente alla versione Windows.
+
+## Aggiornamento dalla 0.12
+La 0.11 non aveva un updater: installa una volta la nuova anteprima. Dalla 0.12 vengono cercati soltanto manifest Mac firmati con la chiave pubblica del progetto, senza elevazione di privilegi. Se la cartella dell’app non è scrivibile, viene segnalato il limite. Il bundle precedente viene conservato e ripristinato se manca la conferma del nuovo avvio. I report Mac-updater descrivono la prova di sostituzione e avvio sul runner Mac; permessi fisici e notarizzazione restano separati.
